@@ -32,3 +32,14 @@ function afficher_object() {
     });
 }
 afficher_object();
+
+// ajout des filtres
+const boutonTrier = document.querySelector(".btn.filter");
+
+boutinTrier.addEventListenner("click", function(){
+  const ordergallery = Array.from(gallery);
+  ordergallery.sort(function(a,b){
+return a.title != b.title;
+  });
+  console.log(ordergallery);
+});
