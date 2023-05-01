@@ -1,3 +1,4 @@
 Backend/
 Frontend/assets/images
 package-lock.json
+.vscode/settings.json
