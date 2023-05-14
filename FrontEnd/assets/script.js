@@ -1,5 +1,5 @@
 //création de la fonction pour afficher les objects en faisant appel à une API
-function afficher_object() {
+function afficher_object(category_name) {
   //requet api avec fonction fetch
   fetch("http://localhost:5678/api/works")
     //recherche reponse dans le fichier json
@@ -8,7 +8,13 @@ function afficher_object() {
     .then((data) => {
       // Traiter les données JSON
       //définir les éléments qu'on va utiliser présents dans l'api
-      const data_response = data;
+      let data_response = data;
+      if (category_name != undefined && category_name != "Tous") {
+        let data_response2 = data_response.filter((element) => {
+          return element.category.name === category_name;
+        });
+        data_response = data_response2;
+      }
 
       const gallery = document.getElementById("gallery");
       data_response
@@ -37,31 +43,12 @@ function afficher_object() {
     });
 }
 afficher_object();
-
-// function button_filter() {
-//   fetch("http://localhost:5678/api/categories")
-//     .then((response) => response.json())
-//     .then((data) => {
-//       const data_response = data;
-//       const portfolio = document.getElementById("button_section");
-//       data_response.forEach((element) => {
-//         var categories_button = document.createElement("button");
-
-//         categories_button.textContent = element.name;
-//         categories_button.name = element.name;
-//         categories_button.className = "btn-filter";
-
-//         portfolio.appendChild(categories_button);
-//       });
-//     });
-// }
-// button_filter();
-
 const btnFilters = document.querySelectorAll(".btn-filter");
-console.log(btnFilters); // affiche une NodeList des boutons avec la classe 'btn-filter'
 
 btnFilters.forEach((button) => {
   button.addEventListener("click", () => {
-    console.log(button.name);
+    var gallery = document.getElementById("gallery");
+    gallery.innerHTML = "";
+    afficher_object(button.name);
   });
 });
