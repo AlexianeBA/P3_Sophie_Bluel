@@ -52,3 +52,18 @@ btnFilters.forEach((button) => {
     afficher_object(button.name);
   });
 });
+const form = document.getElementById("contact");
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const message = document.getElementById("message").value;
+
+  if (name !== "" && email !== "" && message !== "") {
+    const pop = "Envoyé avec succès!";
+    alert(pop);
+    document.getElementById("contact").reset();
+  } else {
+    alert("Veuillez remplir tous les champs du formulaire.");
+  }
+});
