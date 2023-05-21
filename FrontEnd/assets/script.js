@@ -67,3 +67,11 @@ form.addEventListener("submit", function (event) {
     alert("Veuillez remplir tous les champs du formulaire.");
   }
 });
+function isLogged() {
+  let log = document.cookie;
+  console.log(log);
+  if (log.length > 1) {
+    console.log("existe");
+  }
+}
+isLogged();

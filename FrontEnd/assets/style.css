@@ -199,12 +199,21 @@ margin: auto;
 #contentLogin {
 background-color: black;
 color: white;
+display: flex;
+justify-content: center;
+gap: 20px;
+height: 30px;
+padding: 7px;
 
 }
 .changements{
 color: black;
 background-color: white;
 border-radius:20px 20px 20px 20px;
+padding: 7px 7px 7px 7px;
+}
+.edition{
+	padding-top: 7px;
 }
 .btn-style{
 	margin-top: 97px;
