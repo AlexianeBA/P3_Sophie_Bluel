@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
+
     <link
       href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
       rel="stylesheet"
@@ -14,22 +14,26 @@
     <meta name="description" content="" />
     <link rel="stylesheet" href="./assets/style.css" />
   </head>
+
   <body>
-    <div id="contentLogin">
-      <i class="fa-regular fa-pen-to-square"><p class="edition">Mode édition</p></i>
+    <div id="is_connected_edition_mode" class="contentLogin">
+      <i class="fa-regular fa-pen-to-square">
+        <p class="edition">Mode édition</p>
+      </i>
       <a href="" class="changements">publier les changements</a>
-    </div> 
+    </div>
     <header>
-      
       <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
       <nav>
         <ul>
           <li>projets</li>
           <li>contact</li>
-          <li><a href="login.html" class="login">login</a></li>
-          
-
-          <div class="logout"><li>logout</li></div>
+          <li id="is_not_connected_login_link">
+            <a href="login.html" class="login">login</a>
+          </li>
+          <li id="is_connected_login_link" class="logout" onclick="log_out()">
+            <a href="index.html">logout</a>
+          </li>
           <li>
             <img src="./assets/icons/instagram.png" alt="Instagram" />
           </li>
@@ -62,13 +66,29 @@
       </section>
       <section id="portfolio">
         <h2>Mes Projets</h2>
-        <div id="button_section" ></div>
+        <div id="button_section"></div>
         <div class="btn-style">
-          <button class="btn-filter" name="Tous" data-message="boutonTous">Tous</button>
-          <button class="btn-filter" name="Objets" data-message="boutonObjets">Objets</button>
-          <button class="btn-filter btn-filter-except-1" name="Appartements" data-message="boutonAppartements">Appartements</button>
-          <button class="btn-filter btn-filter-except" name="Hotels & restaurants" data-message="boutonHotelsRestaurants">Hôtels & restaurants</button>
-          </div>
+          <button class="btn-filter" name="Tous" data-message="boutonTous">
+            Tous
+          </button>
+          <button class="btn-filter" name="Objets" data-message="boutonObjets">
+            Objets
+          </button>
+          <button
+            class="btn-filter btn-filter-except-1"
+            name="Appartements"
+            data-message="boutonAppartements"
+          >
+            Appartements
+          </button>
+          <button
+            class="btn-filter btn-filter-except"
+            name="Hotels & restaurants"
+            data-message="boutonHotelsRestaurants"
+          >
+            Hôtels & restaurants
+          </button>
+        </div>
         <div class="gallery" id="gallery">
           <!-- <figure>
             <img src="assets/images/abajour-tahina.png" alt="Abajour Tahina" />
@@ -81,12 +101,12 @@
         <p>Vous avez un projet ? Discutons-en !</p>
         <form id="contact" action="#" method="post">
           <label for="name">Nom</label>
-          <input type="text" name="name" id="name">
+          <input type="text" name="name" id="name" />
           <label for="email">Email</label>
-          <input type="email" name="email" id="email">
+          <input type="email" name="email" id="email" />
           <label for="message">Message</label>
           <textarea name="message" id="message" cols="30" rows="10"></textarea>
-          <input type="submit" value="Envoyer">
+          <input type="submit" value="Envoyer" />
         </form>
       </section>
     </main>
@@ -100,5 +120,10 @@
     </footer>
   </body>
   <script type="text/javascript" src="assets/script.js"></script>
-  <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+  <script
+    defer
+    src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+    integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
+    crossorigin="anonymous"
+  ></script>
 </html>

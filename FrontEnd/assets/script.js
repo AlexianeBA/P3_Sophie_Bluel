@@ -70,8 +70,40 @@ form.addEventListener("submit", function (event) {
 function isLogged() {
   let log = document.cookie;
   console.log(log);
+  utilisateurConnecte = false;
   if (log.length > 1) {
     console.log("existe");
+    utilisateurConnecte = true;
   }
+  contentLog(utilisateurConnecte);
 }
 isLogged();
+
+function contentLog(utilisateurConnecte) {
+  var is_connected_edition_mode = document.getElementById(
+    "is_connected_edition_mode"
+  );
+  var is_connected_login_link = document.getElementById(
+    "is_connected_login_link"
+  );
+  var is_not_connected_login_link = document.getElementById(
+    "is_not_connected_login_link"
+  );
+
+  if (utilisateurConnecte) {
+    is_connected_edition_mode.style.display = "flex";
+    is_connected_login_link.style.display = "block";
+    is_not_connected_login_link.style.display = "none";
+  } else {
+    is_connected_edition_mode.style.display = "none";
+    is_connected_login_link.style.display = "none";
+    is_not_connected_login_link.style.display = "block";
+  }
+}
+
+var logoutButton = document.querySelector("logout");
+
+function log_out() {
+  document.cookie = "autLogin=test; max-age=0; secure; path=/";
+  window.location.href = "index.html";
+}
