@@ -107,3 +107,98 @@ function log_out() {
   document.cookie = "autLogin=test; max-age=0; secure; path=/";
   window.location.href = "index.html";
 }
+
+var modal = document.getElementById("myModal");
+var btn = document.getElementById("openModalBtn");
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function () {
+  modal.style.display = "block";
+};
+
+span.onclick = function () {
+  modal.style.display = "none";
+};
+
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+
+function pop(category_name) {
+  fetch("http://localhost:5678/api/works")
+    .then((response) => response.json())
+    .then((data) => {
+      let data_response = data;
+      if (category_name != undefined && category_name != "Tous") {
+        let data_response2 = data_response.filter((element) => {
+          return element.category.name === category_name;
+        });
+        data_response = data_response2;
+      }
+
+      const content_pop_up = document.getElementById("gallery-in-pop-up");
+      data_response.forEach((element) => {
+        var img = document.createElement("img");
+        var legend_div = document.createElement("div");
+        var legend = document.createElement("p");
+        legend.textContent = "éditer";
+        legend.classList.add("legend_picture");
+        img.src = element.imageUrl;
+        img.classList.add("modal-img");
+        content_pop_up.appendChild(img);
+        img.insertAdjacentElement("afterend", legend);
+        legend_div.appendChild(img);
+        legend_div.appendChild(legend);
+        content_pop_up.appendChild(legend_div);
+      });
+    });
+}
+pop();
+
+var selectedFile = null;
+
+document.getElementById("openModalBtn").addEventListener("click", function () {
+  document.getElementById("modalModificationPict").style.display = "block";
+});
+document
+  .getElementsByClassName("close")[0]
+  .addEventListener("click", function () {
+    document.getElementById("modalModificationPict").style.display = "none";
+  });
+document.getElementById("addImgBtn").addEventListener("click", function () {
+  document.getElementById("modalAddPict").style.display = "block";
+});
+
+function afficher_categories() {
+  fetch("http://localhost:5678/api/categories")
+    .then((response) => response.json())
+    .then((data) => {
+      var select = document.getElementById("categorySelect");
+
+      data.forEach(function (category) {
+        var option = document.createElement("option");
+        option.text = category.name;
+        select.add(option);
+      });
+    });
+}
+var imageInput = document.getElementById("imageInput");
+
+var imageInput = document.getElementById("imageInput");
+
+imageInput.addEventListener("change", function (event) {
+  var file = event.target.files[0];
+
+  if (file) {
+    var imageURL = URL.createObjectURL(file);
+
+    var imagePreview = document.createElement("img");
+    imagePreview.src = imageURL;
+
+    var imagePreviewContainer = document.getElementById("image");
+    imagePreviewContainer.innerHTML = "";
+    imagePreviewContainer.appendChild(imagePreview);
+  }
+});
