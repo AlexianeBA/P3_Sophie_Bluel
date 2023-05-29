@@ -69,10 +69,8 @@ form.addEventListener("submit", function (event) {
 });
 function isLogged() {
   let log = document.cookie;
-  console.log(log);
   utilisateurConnecte = false;
   if (log.length > 1) {
-    console.log("existe");
     utilisateurConnecte = true;
   }
   contentLog(utilisateurConnecte);
@@ -111,17 +109,11 @@ function log_out() {
   window.location.href = "index.html";
 }
 
-function pop(category_name) {
+function pop() {
   fetch("http://localhost:5678/api/works")
     .then((response) => response.json())
     .then((data) => {
       let data_response = data;
-      if (category_name != undefined && category_name != "Tous") {
-        let data_response2 = data_response.filter((element) => {
-          return element.category.name === category_name;
-        });
-        data_response = data_response2;
-      }
 
       const content_pop_up = document.getElementById("gallery-in-pop-up");
       data_response.forEach((element) => {
@@ -200,11 +192,36 @@ function open_modale() {
 
   checkBtn.addEventListener("click", function () {
     if (selectedImg.src) {
-      var newImage = document.createElement("img");
-      newImage.src = selectedImg.src;
-      portfolio.appendChild(newImage);
-      selectedImg.src = "";
-      imageInput.value = "";
+      let formData = {
+        image: selectedImg.src,
+        title: "password",
+        category: 1,
+      };
+      console.log(formData);
+      fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          accept: "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            // window.location.href = "index.html";
+            return response.json();
+          } else {
+            const unvalid = "Il y a un soucis";
+            alert(unvalid);
+          }
+        })
+
+        .then((data) => {
+          console.log(data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   });
 
