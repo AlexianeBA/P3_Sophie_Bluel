@@ -29,10 +29,15 @@
           <li>projets</li>
           <li>contact</li>
           <li id="is_not_connected_login_link">
-            <a href="login.html" class="login">login</a>
+            <a href="login.html" class="authentification-link">login</a>
           </li>
-          <li id="is_connected_login_link" class="logout" onclick="log_out()">
-            <a href="index.html">logout</a>
+          <li id="is_connected_login_link">
+            <a
+              href="index.html"
+              class="authentification-link"
+              onclick="log_out()"
+              >logout</a
+            >
           </li>
           <li>
             <img src="./assets/icons/instagram.png" alt="Instagram" />
@@ -66,39 +71,47 @@
       </section>
       <section id="portfolio">
         <h2>Mes Projets</h2>
-        <button id="openModalBtn">Modifier</button>
-        <div id="modalModificationPict" class="modal">
-          <div class="modal-content">
+        <div id="connected_modif">
+          <i class="fas fa-edit"></i>
+          <button id="openModalBtn" onclick="open_modale()">Modifier</button>
+        </div>
+        <div id="gallerymodal" class="modal">
+          <div class="modal-content" id="edit-gallery">
             <span class="close">&times;</span>
             <p class="title-pop">Gallerie photo</p>
-            <div id="gallery-in-pop-up" class="grid"></div>
-            <button id="addImgBtn" class="btn-add">Ajouter une photo</button>
 
-            <button
-              id="deleteImageBtn"
-              onclick="deleteImage()"
-              class="btn-delet"
-            >
-              Supprimer l'image
-            </button>
-            <div id="modalAddPict" class="modal">
-              <div class="modal-content">
-                <span class="close">&times;</span>
-                <p class="title-pop">Ajout photo</p>
+            <div id="gallery-in-pop-up" class="grid"></div>
+            <div class="btn-pict">
+              <button id="addImgBtn" class="btn-add">Ajouter une photo</button>
+
+              <button
+                id="deleteImageBtn"
+                onclick="deleteImage()"
+                class="btn-delet"
+              >
+                Supprimer l'image
+              </button>
+            </div>
+          </div>
+          <div id="add-pict" class="modal">
+            <div class="modal-content">
+              <span id="backToFirstModal">&larr; Retour</span>
+              <span class="close">&times;</span>
+              <p class="title-pop">Ajout photo</p>
+
+              <div id="imageadd">
                 <input type="file" id="imageInput" />
-                <p>Titre</p>
-                <input
-                  type="text"
-                  id="textInput"
-                  placeholder="Entrer du texte"
-                />
-                <select id="categorySelect"></select>
-                <div id="image"></div>
-                <button id="checkbtn" class="btn-add">Valider</button>
+                <img class="imageajoutee" id="selectedImg" src="" />
               </div>
+              <p>Titre</p>
+              <input type="text" id="textInput" placeholder="Entrer du texte" />
+              <select id="categorySelect"></select>
+
+              <button id="checkbtn" class="btn-add">Valider</button>
             </div>
           </div>
         </div>
+
         <div id="button_section"></div>
         <div class="btn-style">
           <button class="btn-filter" name="Tous" data-message="boutonTous">

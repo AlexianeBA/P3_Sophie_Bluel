@@ -89,15 +89,18 @@ function contentLog(utilisateurConnecte) {
   var is_not_connected_login_link = document.getElementById(
     "is_not_connected_login_link"
   );
+  var connected_modif = document.getElementById("connected_modif");
 
   if (utilisateurConnecte) {
     is_connected_edition_mode.style.display = "flex";
     is_connected_login_link.style.display = "block";
     is_not_connected_login_link.style.display = "none";
+    connected_modif.style.display = "flex";
   } else {
     is_connected_edition_mode.style.display = "none";
     is_connected_login_link.style.display = "none";
     is_not_connected_login_link.style.display = "block";
+    connected_modif.style.display = "none";
   }
 }
 
@@ -107,24 +110,6 @@ function log_out() {
   document.cookie = "autLogin=test; max-age=0; secure; path=/";
   window.location.href = "index.html";
 }
-
-var modal = document.getElementById("myModal");
-var btn = document.getElementById("openModalBtn");
-var span = document.getElementsByClassName("close")[0];
-
-btn.onclick = function () {
-  modal.style.display = "block";
-};
-
-span.onclick = function () {
-  modal.style.display = "none";
-};
-
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-};
 
 function pop(category_name) {
   fetch("http://localhost:5678/api/works")
@@ -159,17 +144,83 @@ pop();
 
 var selectedFile = null;
 
-document.getElementById("openModalBtn").addEventListener("click", function () {
-  document.getElementById("modalModificationPict").style.display = "block";
-});
-document
-  .getElementsByClassName("close")[0]
-  .addEventListener("click", function () {
-    document.getElementById("modalModificationPict").style.display = "none";
+function open_modale() {
+  var modal = document.getElementById("gallerymodal");
+  var firstmodal = document.getElementById("edit-gallery");
+  var secondmodal = document.getElementById("add-pict");
+  document
+    .getElementById("openModalBtn")
+    .addEventListener("click", function () {
+      modal.style.display = "block";
+      firstmodal.style.display = "block";
+    });
+  var cross_buttons = document.querySelectorAll(".close");
+  cross_buttons.forEach(function (cross_button) {
+    cross_button.addEventListener("click", function () {
+      firstmodal.style.display = "none";
+      secondmodal.style.display = "none";
+      modal.style.display = "none";
+    });
   });
-document.getElementById("addImgBtn").addEventListener("click", function () {
-  document.getElementById("modalAddPict").style.display = "block";
-});
+  document.getElementById("addImgBtn").addEventListener("click", function () {
+    firstmodal.style.display = "none";
+    secondmodal.style.display = "block";
+  });
+  backToFirstModal.addEventListener("click", function () {
+    secondmodal.style.display = "none";
+    firstmodal.style.display = "block";
+  });
+  var imageInput = document.getElementById("imageInput");
+  var selectedImg = document.getElementById("selectedImg");
+  var imageadd = document.getElementById("imageadd");
+
+  imageInput.addEventListener("change", function (event) {
+    var file = event.target.files[0];
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+      selectedImg.src = e.target.result;
+      imageadd.style.backgroundImage = "url('" + e.target.result + "')";
+      imageadd.style.display = "block";
+    };
+  });
+
+  var imageinput = document.getElementById("imageInput");
+  var selectedImg = document.getElementById("selectedImg");
+
+  document.getElementById("imageInput").addEventListener("click", function () {
+    imageInput.style.display = "none";
+    selectedImg.style.display = "flex";
+  });
+
+  var imageInput = document.getElementById("imageInput");
+  var selectedImg = document.getElementById("selectedImg");
+  var checkBtn = document.getElementById("checkbtn");
+  var portfolio = document.getElementById("portfolio");
+
+  checkBtn.addEventListener("click", function () {
+    if (selectedImg.src) {
+      var newImage = document.createElement("img");
+      newImage.src = selectedImg.src;
+      portfolio.appendChild(newImage);
+      selectedImg.src = "";
+      imageInput.value = "";
+    }
+  });
+
+  imageInput.addEventListener("change", function (event) {
+    var file = event.target.files[0];
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+      if (selectedImg.src !== e.target.result) {
+        selectedImg.src = e.target.result;
+      }
+    };
+
+    reader.readAsDataURL(file);
+  });
+}
 
 function afficher_categories() {
   fetch("http://localhost:5678/api/categories")
@@ -184,6 +235,7 @@ function afficher_categories() {
       });
     });
 }
+afficher_categories();
 var imageInput = document.getElementById("imageInput");
 
 var imageInput = document.getElementById("imageInput");
