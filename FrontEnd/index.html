@@ -78,36 +78,65 @@
         <div id="gallerymodal" class="modal">
           <div class="modal-content" id="edit-gallery">
             <span class="close">&times;</span>
-            <p class="title-pop">Gallerie photo</p>
+            <p class="title-pop">Galerie photo</p>
 
             <div id="gallery-in-pop-up" class="grid"></div>
             <div class="btn-pict">
               <button id="addImgBtn" class="btn-add">Ajouter une photo</button>
-
-              <button
-                id="deleteImageBtn"
-                onclick="deleteImage()"
-                class="btn-delet"
-              >
-                Supprimer l'image
-              </button>
+              <div class="deletpict">
+                <button
+                  id="deleteImageBtn"
+                  onclick="deleteImage()"
+                  class="btn-delet"
+                >
+                  Supprimer l'image
+                </button>
+                <button class="edit" style="display: none">éditer</button>
+              </div>
             </div>
           </div>
           <div id="add-pict" class="modal">
             <div class="modal-content">
-              <span id="backToFirstModal">&larr; Retour</span>
+              <span id="backToFirstModal">&larr; </span>
               <span class="close">&times;</span>
               <p class="title-pop">Ajout photo</p>
 
-              <div id="imageadd">
-                <input type="file" id="imageInput" />
+              <div id="imageadd" class="imgadd">
+                <div class="icon_picture">
+                  <i class="far fa-image fa-6x" id="icon"></i>
+                </div>
+                <label
+                  for="imageInput"
+                  class="add-photo-link"
+                  id="btn_upload_picture"
+                  >+ Ajouter une photo</label
+                >
+                <input
+                  type="file"
+                  id="imageInput"
+                  accept="image/jpeg, image/png"
+                  style="display: none"
+                />
                 <img class="imageajoutee" id="selectedImg" src="" />
+                <p
+                  class="limit_size_upload_picture"
+                  id="limit_size_upload_picture"
+                >
+                  jpg, png : 4mo max
+                </p>
               </div>
-              <p>Titre</p>
-              <input type="text" id="textInput" placeholder="Entrer du texte" />
-              <select id="categorySelect"></select>
+              <div class="add-legend">
+                <p class="title-pict-add">Titre</p>
+                <input
+                  type="text"
+                  id="textInput"
+                  placeholder="Entrer du texte"
+                />
+                <p class="category_pict_add">Catégorie</p>
+                <select id="categorySelect"></select>
 
-              <button id="checkbtn" class="btn-add">Valider</button>
+                <button id="checkbtn" class="btn-validate">Valider</button>
+              </div>
             </div>
           </div>
         </div>
@@ -161,6 +190,7 @@
     </footer>
   </body>
   <script type="text/javascript" src="assets/script.js"></script>
+  <script type="text/javascript" src="assets/modal.js"></script>
   <script
     defer
     src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
